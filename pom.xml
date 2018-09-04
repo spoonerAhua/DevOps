@@ -4,6 +4,11 @@
 	<groupId>devops</groupId>
 	<artifactId>devops-demo</artifactId>
 	<version>1</version>
+	<packaging>war</packaging>
+	<properties>
+		<maven.build.timestamp.format>yyyyMMddHHmmss</maven.build.timestamp.format>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+	</properties>
 
 	<dependencies>
 		<dependency>
@@ -17,5 +22,27 @@
 			<version>4.11</version>
 		</dependency>
 	</dependencies>
-	<packaging>war</packaging>
+	<build>
+		<finalName>devops-demo-${current.time}</finalName>
+		<plugins>
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>build-helper-maven-plugin</artifactId>
+				<version>1.9.1</version>
+				<executions>
+					<execution>
+						<id>timestamp-property</id>
+						<goals>
+							<goal>timestamp-property</goal>
+						</goals>
+					</execution>
+				</executions>
+				<configuration>
+					<name>current.time</name>
+					<pattern>yyyyMMdd-HHmmss</pattern>
+					<timeZone>GMT+8</timeZone>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
 </project>
